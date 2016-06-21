@@ -25,10 +25,11 @@ print df.head(10)
 
 dfCorrect = df[(df.label == df.Prediction)]
 
-print dfCorrect.head(10)
+print dfCorrect.tail(10)
 
-print len(dfCorrect) 
+dfPoor = df[(df.label == 1)]
 
-print 'Machine learning classifier'
-print 'For 2015 Street Tree Census at Prediciting health == "Poor"'
-print 'predicts at:', len(dfCorrect)/(len(df.index)*1.0)
+print 'Machine Learning Classifier'
+print 'For 2015 Street Tree Census at Prediciting health == "Poor":', len(dfPoor.index)
+print len(dfCorrect), 'were predicted correctly out of', len(df.index)
+print 'predicts at:', len(dfCorrect.index)/(len(df.index)*1.0)

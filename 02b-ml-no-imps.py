@@ -50,7 +50,7 @@ Y = data['label']
 # fit here
 clf = RandomForestClassifier() #Predict: 0.938370417801
 clf = ExtraTreesClassifier() #Predict: 0.610565071234
-clf = RandomForestClassifier(n_estimators=100) #Predict: 
+clf = RandomForestClassifier(n_estimators=100) #Predict: 0.955135798517
 
 print datetime.now()
 
