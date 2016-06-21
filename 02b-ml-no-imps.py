@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.cross_validation import cross_val_score
 from datetime import datetime
 
@@ -51,6 +51,7 @@ Y = data['label']
 clf = RandomForestClassifier() #Predict: 0.938370417801
 clf = ExtraTreesClassifier() #Predict: 0.610565071234
 clf = RandomForestClassifier(n_estimators=100) #Predict: 0.955135798517
+clf = RandomForestClassifier(n_estimators=100) #Predict: 0.95509311136, 2nd time run
 
 print datetime.now()
 
@@ -71,18 +72,18 @@ print "prediction time:", (datetime.now() - t0)
 ftime = str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-')
 print ftime
 
-with open('output/myoutput-'+ftime+'.csv', 'w') as f:
+with open('output/myoutput-'+ftime+'_POST.csv', 'w') as f:
     f.write('Id,Prediction\n')
     the_id = 1
     for p in prediction:
         f.write("%s,%s\n" % (the_id, p))
         the_id += 1
 
-print 'cross validating...'
-t0 = datetime.now()
-scores = cross_val_score(clf, X, Y, cv=5)
-print "cross validation time:", (datetime.now() - t0)
-print scores #print prediction.score(X, Y)
+# print 'cross validating...'
+# t0 = datetime.now()
+# scores = cross_val_score(clf, X, Y, cv=5)
+# print "cross validation time:", (datetime.now() - t0)
+# print scores #print prediction.score(X, Y)
 
 importances = clf.feature_importances_
 print importances
