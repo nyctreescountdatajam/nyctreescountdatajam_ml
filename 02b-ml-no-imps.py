@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.cross_validation import cross_val_score
 from datetime import datetime
+from IPython import embed
 
 print 'time start:', datetime.now()
 t_start = datetime.now()
@@ -38,10 +39,11 @@ def one_hot(D, index_dict=None, num_indexes=-1):
     return X, index_dict, num_indexes
 
 
-
 data = pd.read_csv('data.csv') #def main():
+data = data.head(2000)
 t0 = datetime.now()
 X, index_dict, num_indexes = one_hot(data[data.columns[:-1]])
+
 print "one hot training set time:", (datetime.now() - t0)
 print 'count of features from one hot', X.shape
 
@@ -92,12 +94,26 @@ std = np.std([tree.feature_importances_ for tree in clf.estimators_],axis=0)
 indices = np.argsort(importances)[::-1]
 
 impFeaturesList = [] #empty list for feature importances
+impFeatures =[]
+importances_sorted =[]
 impThresh       = 0.00001
+
+ohe_inverse = {}
+for feature, lookup in index_dict.iteritems():
+    for category, ohe in lookup.iteritems():
+        ohe_inverse[ohe] = feature+"_"+str(category)
+        
 
 for f in range(X.shape[1]):
     #print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
     if importances[indices[f]] > impThresh: #was 0.00000001, changed to 0.000001
         impFeaturesList.append(indices[f])
+        importances_sorted.append(importances[indices[f]])
+        impFeatures.append(ohe_inverse[indices[f]])
+        
+with open('importances.csv', 'w') as f:
+    for feature, importance in zip(impFeatures,importances_sorted):
+        f.write('{0},{1}\n'.format(feature,importance))
 
 print 'count of features in important features list that are above',impThresh,'is', len(impFeaturesList)
 
