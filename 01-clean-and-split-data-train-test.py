@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy  as np
 
-inCSV = '/Users/danielmsheehan/Dropbox/Projects/treescount/data/processing/to_cartodb/nyctrees2015.csv'
+inCSV = '/Users/danielmsheehan/Downloads/nyctrees2015.csv'
 
 df = pd.read_csv(inCSV)
 

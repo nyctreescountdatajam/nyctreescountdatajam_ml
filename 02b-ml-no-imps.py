@@ -35,7 +35,10 @@ def one_hot(D, index_dict=None, num_indexes=-1):
             if val in index_dict[c]:
                 j = index_dict[c][val]
                 X[i,j] = 1
+    print index_dict, num_indexes
     return X, index_dict, num_indexes
+
+    
 
 
 
