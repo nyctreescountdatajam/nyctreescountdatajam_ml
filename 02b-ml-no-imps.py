@@ -35,7 +35,7 @@ def one_hot(D, index_dict=None, num_indexes=-1):
             if val in index_dict[c]:
                 j = index_dict[c][val]
                 X[i,j] = 1
-    print index_dict, num_indexes
+    
     return X, index_dict, num_indexes
 
     
@@ -45,6 +45,7 @@ def one_hot(D, index_dict=None, num_indexes=-1):
 data = pd.read_csv('data.csv') #def main():
 t0 = datetime.now()
 X, index_dict, num_indexes = one_hot(data[data.columns[:-1]])
+print index_dict, num_indexes
 print "one hot training set time:", (datetime.now() - t0)
 print 'count of features from one hot', X.shape
 
