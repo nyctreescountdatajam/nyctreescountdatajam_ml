@@ -3,7 +3,6 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.cross_validation import cross_val_score
 from datetime import datetime
-from IPython import embed
 
 print 'time start:', datetime.now()
 t_start = datetime.now()
@@ -40,7 +39,7 @@ def one_hot(D, index_dict=None, num_indexes=-1):
 
 
 data = pd.read_csv('data.csv') #def main():
-data = data.head(2000)
+
 t0 = datetime.now()
 X, index_dict, num_indexes = one_hot(data[data.columns[:-1]])
 
