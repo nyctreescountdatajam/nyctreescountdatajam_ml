@@ -14,8 +14,10 @@ print dfg.head(10)
 
 #dfp = pd.read_csv('output/myoutput-2016-06-20-20-42-10-243406_randfore_9384.csv')
 #dfp = pd.read_csv('output/myoutput-2016-06-20-21-07-17-582827.csv')
-dfp = pd.read_csv('output/myoutput-2016-06-20-21-41-20-469816.csv')
+#dfp = pd.read_csv('output/myoutput-2016-06-20-21-41-20-469816.csv')
 #dfp = pd.read_csv('output/myoutput-2016-06-21-10-18-38-047204_POST.csv')
+#dfp = pd.read_csv('output/myoutput-2016-06-29-19-47-50-865448_POST.csv')
+dfp = pd.read_csv('output/myoutput-2016-06-29-21-24-17-449589_POST.csv')
 
 print dfp.head(10)
 df = df.merge(dfp, on='Id', how='left')

@@ -12,6 +12,18 @@ df = df.drop(dropList, axis=1)
 
 df['label'] = np.where(df['health']=='Poor', 1, 0)
 
+dfx=df[['health']] 
+dfx['count'] = 1
+dfg = dfx.groupby('health').sum()
+print dfg.head(10)
+
+dfx=df[['label']]
+dfx['count'] = 1
+dfg = dfx.groupby('label').sum()
+print dfg.head(10)
+
+df = df.drop(['health'], axis=1) #JUST ADDED TO REMOVE HEALTH COLUMN COMPLETELY
+
 print df.head(10)
 
 msk = np.random.rand(len(df)) < 0.8 #split 80/20, 80% for training, 20% for testing
@@ -24,17 +36,12 @@ print len(train)
 print len(test)
 
 test.to_csv('quiz_w_label.csv', index=False)
-test = test.drop(['health','label'],axis=1)
+
+testDropCols = ['label'] #['health','label']
+
+test = test.drop(testDropCols,axis=1)
 
 train.to_csv('data.csv',index=False)
 test.to_csv('quiz.csv', index=False)
 
-dfx=df[['health']]
-dfx['count'] = 1
-dfg = dfx.groupby('health').sum()
-print dfg.head(10)
 
-dfx=df[['label']]
-dfx['count'] = 1
-dfg = dfx.groupby('label').sum()
-print dfg.head(10)
